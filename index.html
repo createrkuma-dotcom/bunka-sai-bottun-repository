@@ -74,24 +74,17 @@ html, body {
 
 <script>
 
-// 現在再生している音声
-let currentAudio = null;
-
 document.querySelectorAll(".sound-button").forEach(button => {
 
     button.addEventListener("click", () => {
 
-        // すでに別の音声が流れていたら停止
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-
-        // 押されたボタンに対応する音声
         const soundFile = button.dataset.sound;
 
-        currentAudio = new Audio(soundFile);
-        currentAudio.play();
+        // 押すたびに新しいAudioを作る
+        // → 他の音声を止めずに同時再生できる
+        const audio = new Audio(soundFile);
+
+        audio.play();
 
     });
 
